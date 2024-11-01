@@ -37,11 +37,13 @@ public class Course
     // Check for Conflicts Method
     public boolean checkCourseConflict(Course other)
     {
+
         // Check if courses are on the same day, if not then no conflict
         if(this.day != other.day)
         {
             // Return no conflict
             return false;
+            break;
         }
 
         // Define a date time formatter
@@ -70,8 +72,7 @@ public class Course
     public void parseTimeSlot(String timeSlot)
     {
         // Create an array of strings in order to extract the first day char
-        String[] parts = timeSlot.split(" ");
-
+        String[] parts = timeSlot.split(",",2);
 
         // Putting the first part into the day
         this.day = parts[0].charAt(0);
@@ -88,15 +89,18 @@ public class Course
 
 
     // Basic Methods
-    public String getCourseID() {
+    public String getCourseID()
+    {
         return courseID;
     }
 
-    public void setCourseID(String courseID) {
+    public void setCourseID(String courseID)
+    {
         this.courseID = courseID;
     }
 
-    public String getExtraText() {
+    public String getExtraText()
+    {
         return extraText;
     }
 

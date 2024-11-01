@@ -25,7 +25,6 @@ public class GroupList
             if(groupList.get(i).getGroupName().equalsIgnoreCase(thisGroupName))
             {
                 return groupList.get(i);
-
             }
         }
         System.out.println("Group with that name not found");

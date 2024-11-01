@@ -21,16 +21,22 @@ public class CourseList
     // NEEDED for adding courses to a group in main method
     Course searchForCourse(String courseID)
     {
+        Course foundCourse = null;
         for(int i = 0; i < courseList.size(); i++)
         {
              //if the given class is in the course list
             if(courseList.get(i).getCourseID().equalsIgnoreCase(courseID))
             {
-                return courseList.get(i);
+                foundCourse = courseList.get(i);
             }
+
         }
-        System.out.println("Course not found");
-        return null;
+        if(foundCourse == null)
+        {
+            System.out.println("Course not found");
+        }
+
+        return foundCourse;
     }
 
     // Basic Methods
