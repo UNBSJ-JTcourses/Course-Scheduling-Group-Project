@@ -1,5 +1,6 @@
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.time.LocalTime;
 /****************************************************************************
@@ -112,7 +113,7 @@ public class Group
         // Create an array of the char days setting H as thursday for now
         List<Character> dayOrder = Arrays.asList('M', 'T', 'W', 'H', 'F');
         // return the index of the day
-        return dayOrder.indexof(day);
+        return dayOrder.indexOf(day);
     }
 
     // Basic Methods

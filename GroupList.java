@@ -25,10 +25,11 @@ public class GroupList
             if(groupList.get(i).getGroupName().equalsIgnoreCase(thisGroupName))
             {
                 return groupList.get(i);
+
             }
-            System.out.println("Group with that name not found");
-            return null;
         }
+        System.out.println("Group with that name not found");
+        return null;
     }
 
     // Basic Methods
@@ -37,3 +38,6 @@ public class GroupList
         groupList.add(newGroup);
     }
 }
+
+
+

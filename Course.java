@@ -31,7 +31,7 @@ public class Course
         this.courseID = courseID;
         this.extraText = extraText;
         parseTimeSlot(timeSlot);
-        instructor = " ";
+        instructor = "TBD";
     }
 
     // Check for Conflicts Method
@@ -48,10 +48,10 @@ public class Course
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
 
         // Put each separate time into a LocalTime variable so they can be compared
-        LocalTime thisStart = new LocalTime.parse(this.startTime, formatter);
-        LocalTime thisEnd = new LocalTime.parse(this.endTime, formatter);
-        LocalTime otherStart = new LocalTime.parse(other.startTime, formatter);
-        LocalTime otherEnd = new LocalTime.parse(other.endTime, formatter);
+        LocalTime thisStart = LocalTime.parse(this.startTime, formatter);
+        LocalTime thisEnd = LocalTime.parse(this.endTime, formatter);
+        LocalTime otherStart = LocalTime.parse(other.startTime, formatter);
+        LocalTime otherEnd = LocalTime.parse(other.endTime, formatter);
 
         // If this class ends before that on starts or this one starts after that one ends
         if(thisEnd.isBefore(otherStart) || thisStart.isAfter(otherEnd))
@@ -69,12 +69,13 @@ public class Course
     // Parsing the inputted string into different times
     public void parseTimeSlot(String timeSlot)
     {
+        String[] parts = new String[2]; 
         // Create an array of strings in order to extract the first day char
-        String[] parts = timeSlot.split(" ");
+        parts = timeSlot.split(" ");
         // Putting the first part into the day
         this.day = parts[0].charAt(0);
         // Create another array of strings to get the times
-        String[] times = parts[1].split("-");
+        String[] times = parts[1].split(" ");
         // Putting the first part into the startTime
         this.startTime = times[0];
         // Putting the second part into the endTime
