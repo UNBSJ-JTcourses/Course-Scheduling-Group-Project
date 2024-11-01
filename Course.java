@@ -132,7 +132,6 @@ public class Course
         this.instructor = instructor;
     }
 
-    @Override
     public String toString()
     {
         String results = courseID + ", ";

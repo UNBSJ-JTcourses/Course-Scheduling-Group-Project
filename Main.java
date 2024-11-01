@@ -71,9 +71,9 @@ public class Main
                     // Checking conflicts in a group, will display if none found
                     System.out.println("What is the name of the group?");
                     String currentGroupName = myScanner.next();
-                    mainGroupList.searchGroup(currentGroupName);
+                    Group currentGroup1 = mainGroupList.searchForGroup(currentGroupName);
                     // If no conflict will display schedule
-                    currentGroup.checkGroupConflict();
+                    currentGroup1.checkGroupConflict();
                     break;
 
                 case 4:
@@ -83,16 +83,17 @@ public class Main
                     System.out.println("What is the courseID of the class?");
                     String thisClassName = myScanner.next();
                     // Need to implement search in GroupList
-                    Group currentGroup = mainGroupList.searchForGroup(thisGroupName);
+                    Group currentGroup2 = mainGroupList.searchForGroup(thisGroupName);
                     // Need to implement search in CourseList
                     Course currentCourse = mainCourseList.searchForCourse(thisClassName);
-                    currentGroup.add(currentCourse);
+                    currentGroup2.addToGroup(currentCourse);
                     break;
 
                 case 5:
                     // Exits loop and program
                     done = true;
                     break;
+
                 default:
                     // If any wrong input will display an error message
                     System.out.println("Sorry that is not a valid option!");
