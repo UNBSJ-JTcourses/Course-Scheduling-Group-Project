@@ -69,18 +69,21 @@ public class Course
     // Parsing the inputted string into different times
     public void parseTimeSlot(String timeSlot)
     {
-        String[] parts = new String[2]; 
         // Create an array of strings in order to extract the first day char
-        parts = timeSlot.split(" ");
+        String[] parts = timeSlot.split(" ");
+
+
         // Putting the first part into the day
         this.day = parts[0].charAt(0);
-        // Create another array of strings to get the times
-        String[] times = parts[1].split(" ");
-        // Putting the first part into the startTime
-        this.startTime = times[0];
-        // Putting the second part into the endTime
-        this.endTime = times[1];
 
+        // Create another array of strings to get the times
+        String[] times = parts[1].split("-");
+
+        
+        // Putting the first part into the startTime
+        this.startTime = times[0].trim();
+        // Putting the second part into the endTime
+        this.endTime = times[1].trim();
     }
 
 
