@@ -43,7 +43,7 @@ public class Course
         {
             // Return no conflict
             return false;
-            break;
+
         }
 
         // Define a date time formatter
