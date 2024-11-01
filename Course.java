@@ -47,7 +47,7 @@ public class Course
         }
 
         // Define a date time formatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm[]a");
 
         // Put each separate time into a LocalTime variable so they can be compared
         LocalTime thisStart = LocalTime.parse(this.startTime, formatter);
