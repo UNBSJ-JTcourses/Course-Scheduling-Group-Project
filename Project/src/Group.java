@@ -84,8 +84,8 @@ public class Group
                 // If comparison is 0 that means they are on the same day and must compare time
                 if(comparison == 0)
                 {
-                    LocalTime startTime1 = LocalTime.parse(course1.getStartTime(), DateTimeFormatter.ofPattern("h:mma"));
-                    LocalTime startTime2 = LocalTime.parse(course2.getStartTime(), DateTimeFormatter.ofPattern("h:mma"));
+                    LocalTime startTime1 = LocalTime.parse(course1.getStartTime(), DateTimeFormatter.ofPattern("H:mm"));
+                    LocalTime startTime2 = LocalTime.parse(course2.getStartTime(), DateTimeFormatter.ofPattern("H:mm"));
 
                     // If start time 1 is after start time 2 swap them
                     if(startTime1.isAfter(startTime2))

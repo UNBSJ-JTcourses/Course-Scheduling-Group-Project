@@ -47,7 +47,7 @@ public class Course
         }
 
         // Define a date time formatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm[]a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
         // Put each separate time into a LocalTime variable so they can be compared
         LocalTime thisStart = LocalTime.parse(this.startTime, formatter);
@@ -142,11 +142,7 @@ public class Course
 
     public String toString()
     {
-        String results = courseID + ", ";
-        results = results + extraText + ", ";
-        results = results + day + " ";
-        results = results + startTime + "-";
-        results = results + endTime + "\n";
-        return results;
+        return courseID + ", " + extraText + ", " + day + ", " + startTime + ", " + endTime + ", " + instructor + "/n";
+
     }
 }
