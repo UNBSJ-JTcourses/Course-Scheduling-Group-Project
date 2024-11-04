@@ -142,7 +142,7 @@ public class Course
 
     public String toString()
     {
-        return courseID + ", " + extraText + ", " + day + ", " + startTime + ", " + endTime + ", " + instructor + "/n";
+        return courseID + ", " + extraText + ", " + day + ", " + startTime + ", " + endTime + ", " + instructor ;
 
     }
 }
