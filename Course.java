@@ -142,11 +142,16 @@ public class Course
 
     public String toString()
     {
+<<<<<<< Updated upstream:Course.java
         String results = courseID + ", ";
         results = results + extraText + ", ";
         results = results + day + " ";
         results = results + startTime + "-";
         results = results + endTime + "\n";
         return results;
+=======
+        return courseID + ", " + extraText + ", " + day + ", " + startTime + ", " + endTime + ", " + instructor;
+
+>>>>>>> Stashed changes:Project/src/Course.java
     }
 }

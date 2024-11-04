@@ -90,16 +90,16 @@ public class Group
                     // If start time 1 is after start time 2 swap them
                     if(startTime1.isAfter(startTime2))
                     {
-                        list.set(j, course2);
-                        list.set(j+1, course1);
+                        list.set(j+1, course2);
+                        list.set(j, course1);
                         swapped = true;
                     }
                 }
                 // If comparison is 1 or more, course1's day is after course2's day
                 else if (comparison > 0)
                 {
-                    list.set(j, course2);
-                    list.set(j+1, course1);
+                    list.set(j+1, course2);
+                    list.set(j, course1);
                     swapped = true;
                 }
                 // Anything else no swap is required
