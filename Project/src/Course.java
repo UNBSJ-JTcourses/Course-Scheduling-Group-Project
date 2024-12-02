@@ -1,3 +1,4 @@
+import java.io.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 /****************************************************************************
@@ -6,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * @ version - 1.0
  * @ date - October 31st, 2024
  ****************************************************************************/
-public class Course
+public class Course implements Serializable
 {
     // Instance Data
     private String courseID;
@@ -47,7 +48,7 @@ public class Course
         }
 
         // Define a date time formatter
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         // Put each separate time into a LocalTime variable so they can be compared
         LocalTime thisStart = LocalTime.parse(this.startTime, formatter);
@@ -72,7 +73,7 @@ public class Course
     public void parseTimeSlot(String timeSlot)
     {
         // Create an array of strings in order to extract the first day char
-        String[] parts = timeSlot.split(",",2);
+        String[] parts = timeSlot.split(" ",2);
 
         // Putting the first part into the day
         this.day = parts[0].charAt(0);
@@ -142,7 +143,8 @@ public class Course
 
     public String toString()
     {
-        return courseID + ", " + extraText + ", " + day + ", " + startTime + ", " + endTime + ", " + instructor ;
+        return courseID + ", " + extraText + ", " + day + ", " + startTime + "-" + endTime + ", " + instructor ;
 
     }
 }
+

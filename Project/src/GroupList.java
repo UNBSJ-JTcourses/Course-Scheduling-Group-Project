@@ -1,3 +1,5 @@
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 /****************************************************************************
  * CS2043 - Project CourseList Class
@@ -5,7 +7,7 @@ import java.util.ArrayList;
  * @ version - 1.0
  * @ date - October 30th, 2024
  ****************************************************************************/
-public class GroupList
+public class GroupList implements Serializable
 {
     // Instance Data
     private ArrayList<Group> groupList;
@@ -35,6 +37,16 @@ public class GroupList
     public void addGroup(Group newGroup)
     {
         groupList.add(newGroup);
+    }
+
+    public void setGroupList(ArrayList<Group> newGroupList)
+    {
+        groupList = newGroupList;
+    }
+
+    public ArrayList<Group> getGroupList()
+    {
+        return groupList;
     }
 }
 

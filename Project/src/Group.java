@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.time.LocalTime;
  * @ version - 1.0
  * @ date - October 31st, 2024
  ****************************************************************************/
-public class Group
+public class Group implements Serializable
 {
     // Instance Data
     private String name;
@@ -25,6 +26,7 @@ public class Group
     // Check for conflict in a group
     public void checkGroupConflict()
     {
+        boolean conflict = false;
         // Comparing every i course to every j course in group
         for(int i = 0; i < list.size(); i++)
         {
@@ -38,13 +40,14 @@ public class Group
                 {
                     // Print out that there is conflict
                     System.out.println("There is conflict between " + course1.getCourseID() + " and " + course2.getCourseID());
+                    conflict = true;
                 }
-                else
-                {
-                    // If no conflict display schedule
-                    displaySchedule();
-                }
+
             }
+        }
+        if (!conflict)
+        {
+            displaySchedule();
         }
     }
 
@@ -70,6 +73,7 @@ public class Group
     public void sortGroup()
     {
         boolean swapped;
+
         for(int i=0; i < list.size() - 1; i++)
         {
             swapped = false;
@@ -79,27 +83,27 @@ public class Group
                 Course course2 = list.get(j + 1);
 
                 // Compare using Integer compare based on the day's rank
-                int comparison = Integer.compare(dayRank(course1.getDay()), dayRank(course1.getDay()));
+                int comparison = Integer.compare(dayRank(course1.getDay()), dayRank(course2.getDay()));
 
                 // If comparison is 0 that means they are on the same day and must compare time
                 if(comparison == 0)
                 {
-                    LocalTime startTime1 = LocalTime.parse(course1.getStartTime(), DateTimeFormatter.ofPattern("H:mm"));
-                    LocalTime startTime2 = LocalTime.parse(course2.getStartTime(), DateTimeFormatter.ofPattern("H:mm"));
+                    LocalTime startTime1 = LocalTime.parse(course1.getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalTime startTime2 = LocalTime.parse(course2.getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
 
                     // If start time 1 is after start time 2 swap them
                     if(startTime1.isAfter(startTime2))
                     {
-                        list.set(j+1, course2);
-                        list.set(j, course1);
+                        list.set(j, course2);
+                        list.set(j+1, course1);
                         swapped = true;
                     }
                 }
                 // If comparison is 1 or more, course1's day is after course2's day
                 else if (comparison > 0)
                 {
-                    list.set(j+1, course2);
-                    list.set(j, course1);
+                    list.set(j, course2);
+                    list.set(j+1, course1);
                     swapped = true;
                 }
                 // Anything else no swap is required

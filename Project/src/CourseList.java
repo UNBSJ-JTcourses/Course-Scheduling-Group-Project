@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /****************************************************************************
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * @ version - 1.0
  * @ date - October 30th, 2024
  ****************************************************************************/
-public class CourseList
+public class CourseList implements Serializable
 {
     // Instance Data
     private ArrayList<Course> courseList;
