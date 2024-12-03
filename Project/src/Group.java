@@ -32,16 +32,18 @@ public class Group implements Serializable
 
         // For each course in the group
         // Creat a new course for every time slot if there is more than one
-
+        int a;
         for(Course c: list)
         {
             // If there's multiple class times make each individual course
             if(c.getHasMultipleTimes())
             {
-                for (int i = 0; i<c.getClassTimes().size(); i++)
+                a = 0;
+                while(a < c.getClassTimes().size())
                 {
                     // Make new course and add to arraylist of all courses
-                    allCoursesInGroup.add(new Course(c.getCourseID(), c.getExtraText(), c.getTimeslot(i), c.getInstructor()));
+                    allCoursesInGroup.add(new Course(c.getCourseID(), c.getExtraText(), c.getTimeslot(a), c.getInstructor()));
+                    a++;
                 }
             }
             else

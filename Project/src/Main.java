@@ -47,7 +47,7 @@ public class Main implements Serializable
                     String courseID = myScanner.nextLine();
                     System.out.println("Is this a Lecture, Tutorial or Lab?");
                     String extraText = myScanner.nextLine();
-                    System.out.print("What is the time slot?");
+                    System.out.println("What is the time slot?");
                     String timeSlot = myScanner.nextLine();
                     System.out.println("Is there a prof? Yes/No");
                     String answer = myScanner.nextLine();
@@ -70,6 +70,14 @@ public class Main implements Serializable
                     break;
 
                 case 2:
+                    System.out.println("What is the block description?");
+                    String blockTitle = myScanner.nextLine();
+                    System.out.println("What is the time slot?");
+                    String timeslot = myScanner.nextLine();
+                    Course newCourse = new Course(blockTitle, timeslot);
+                    mainCourseList.addCourse(newCourse);
+
+                case 3:
                     // Creating a group
                     System.out.println("What is the group name?");
                     String groupName = myScanner.nextLine();
@@ -78,7 +86,7 @@ public class Main implements Serializable
                     System.out.print("Group made successfully!\n");
                     break;
 
-                case 3:
+                case 4:
                     // Adding courses to a group
                     System.out.println("What is the name of the group?");
                     String thisGroupName = myScanner.nextLine();
@@ -92,7 +100,7 @@ public class Main implements Serializable
                     System.out.print("Course added to group successfully!\n");
                     break;
 
-                case 4:
+                case 5:
                     // Checking conflicts in a group, will display if none found
                     System.out.println("What is the name of the group?");
                     String currentGroupName = myScanner.nextLine();
@@ -101,17 +109,17 @@ public class Main implements Serializable
                     currentGroup1.checkGroupConflict();
                     break;
 
-                case 5:
+                case 6:
                     // Writes everything into a file
                     ArraySerialization.save(mainGroupList);
                     break;
 
-                case 6:
+                case 7:
                     // Reads from a file named "OutputFile.dat"
                     ArraySerialization.read(mainGroupList);
                     break;
 
-                case 7:
+                case 8:
                     // Exits loop and program
                     System.out.println("Goodbye!\n");
                     done = true;

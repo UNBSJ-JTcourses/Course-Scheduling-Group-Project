@@ -47,12 +47,20 @@ public class Course implements Serializable
     {
         this.courseID = courseID;
         this.extraText = extraText;
+        this.classTimes = new ArrayList<>();
         this.classTimes.add(timeslot);
         this.instructor = instructor;
     }
 
-    // Add a non-course block constructor here
-
+    // A non-course block constructor
+    public Course(String extraText, String timeslot)
+    {
+        this.courseID = "";
+        this.extraText = extraText;
+        this.classTimes = new ArrayList<>();
+        this.classTimes = createSeperateCourses(timeslot);
+        instructor = "";
+    }
 
     // Method to create multiple classes from courses seperated by a ';'
     public static ArrayList<Timeslot> createSeperateCourses(String timeslot)
@@ -95,8 +103,6 @@ public class Course implements Serializable
         return new Timeslot(day, startTime, endTime);
     }
 
-/* */ // MAYBE NOT NEEDED ANYMORE?
-    // Check for Conflicts Method
     public boolean checkCourseConflict(Course other)
     {
 
@@ -130,8 +136,6 @@ public class Course implements Serializable
         }
     }
 
-// */
-
     // Basic Methods
     public String getCourseID()
     {
@@ -150,7 +154,14 @@ public class Course implements Serializable
 
     public Timeslot getTimeslot(int i)
     {
-        return classTimes.get(i);
+        if(i >= 0 && i < classTimes.size())
+        {
+            return classTimes.get(i);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public String getExtraText()
@@ -178,7 +189,7 @@ public class Course implements Serializable
     // FIX THIS maybe
     public String toString()
     {
-        return courseID + ", " + extraText + ", " + this.classTimes.toString() + ", " + instructor ;
+        return courseID + " " + extraText + " " + this.classTimes.toString() + " " + instructor ;
 
     }
 }
