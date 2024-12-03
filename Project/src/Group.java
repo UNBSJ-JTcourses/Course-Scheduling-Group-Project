@@ -32,27 +32,33 @@ public class Group implements Serializable
 
         // For each course in the group
         // Creat a new course for every time slot if there is more than one
-        int i = 0;
+
         for(Course c: list)
         {
             // If there's multiple class times make each individual course
             if(c.getHasMultipleTimes())
             {
-                // Make new course and add to arraylist of all courses
-                allCoursesInGroup.add(new Course(c.getCourseID(), c.getExtraText(), c.getTimeslot(i), c.getInstructor()));
-                i++;
+                for (int i = 0; i<c.getClassTimes().size(); i++)
+                {
+                    // Make new course and add to arraylist of all courses
+                    allCoursesInGroup.add(new Course(c.getCourseID(), c.getExtraText(), c.getTimeslot(i), c.getInstructor()));
+                }
+            }
+            else
+            {
+                allCoursesInGroup.add(c);
             }
         }
 
 
         boolean conflict = false;
         // Comparing every i course to every j course in group
-        for(int i = 0; i < list.size(); i++)
+        for(int i = 0; i < allCoursesInGroup.size(); i++)
         {
-            for(int j = i+1; j < list.size(); j++)
+            for(int j = i+1; j < allCoursesInGroup.size(); j++)
             {
-                Course course1 = list.get(i);
-                Course course2 = list.get(j);
+                Course course1 = allCoursesInGroup.get(i);
+                Course course2 = allCoursesInGroup.get(j);
 
                 // If there's conflict
                 if(course1.checkCourseConflict(course2))
@@ -66,22 +72,22 @@ public class Group implements Serializable
         }
         if (!conflict)
         {
-            displaySchedule();
+            displaySchedule(allCoursesInGroup);
         }
     }
 
     // Display Schedule of a group
     // For every course with multiple timeslots create each individual course
-    public void displaySchedule()
+    public void displaySchedule(ArrayList<Course> allCoursesInGroup)
     {
         // Sort group first
-        sortGroup();
+        sortGroup(allCoursesInGroup);
 
         // Declaring a variables for printing
         String results;
         Course currentCourse;
         // For each course in the group get the toString and print it
-        for(int i = 0; i < list.size(); i++)
+        for(int i = 0; i < allCoursesInGroup.size(); i++)
         {
             currentCourse = list.get(i);
             results = currentCourse.toString();
@@ -90,40 +96,40 @@ public class Group implements Serializable
     }
 
     // Sorting method to sort group based on day (char) using bubble sort
-    public void sortGroup()
+    public void sortGroup(ArrayList<Course> allCoursesInGroup)
     {
         boolean swapped;
 
-        for(int i=0; i < list.size() - 1; i++)
+        for(int i=0; i < allCoursesInGroup.size() - 1; i++)
         {
             swapped = false;
-            for(int j=0; j < list.size() - i - 1; j++)
+            for(int j=0; j < allCoursesInGroup.size() - i - 1; j++)
             {
-                Course course1 = list.get(j);
-                Course course2 = list.get(j + 1);
+                Course course1 = allCoursesInGroup.get(j);
+                Course course2 = allCoursesInGroup.get(j + 1);
 
                 // Compare using Integer compare based on the day's rank
-                int comparison = Integer.compare(dayRank(course1.getDay()), dayRank(course2.getDay()));
+                int comparison = Integer.compare(dayRank(course1.getTimeslot(0).getDay()), dayRank(course2.getTimeslot(0).getDay()));
 
                 // If comparison is 0 that means they are on the same day and must compare time
                 if(comparison == 0)
                 {
-                    LocalTime startTime1 = LocalTime.parse(course1.getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
-                    LocalTime startTime2 = LocalTime.parse(course2.getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalTime startTime1 = LocalTime.parse(course1.getTimeslot(0).getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalTime startTime2 = LocalTime.parse(course2.getTimeslot(0).getStartTime(), DateTimeFormatter.ofPattern("HH:mm"));
 
                     // If start time 1 is after start time 2 swap them
                     if(startTime1.isAfter(startTime2))
                     {
-                        list.set(j+1, course2);
-                        list.set(j, course1);
+                        allCoursesInGroup.set(j+1, course2);
+                        allCoursesInGroup.set(j, course1);
                         swapped = true;
                     }
                 }
                 // If comparison is 1 or more, course1's day is after course2's day
                 else if (comparison > 0)
                 {
-                    list.set(j+1, course2);
-                    list.set(j, course1);
+                    allCoursesInGroup.set(j+1, course2);
+                    allCoursesInGroup.set(j, course1);
                     swapped = true;
                 }
                 // Anything else no swap is required

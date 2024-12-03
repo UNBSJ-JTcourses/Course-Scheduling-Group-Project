@@ -47,7 +47,7 @@ public class Course implements Serializable
     {
         this.courseID = courseID;
         this.extraText = extraText;
-        this.timeslot = timeslot;
+        this.classTimes.add(timeslot);
         this.instructor = instructor;
     }
 
@@ -101,7 +101,7 @@ public class Course implements Serializable
     {
 
         // Check if courses are on the same day, if not then no conflict
-        if(this.day != other.day)
+        if(this.getTimeslot(0).getDay() != other.getTimeslot(0).getDay())
         {
             // Return no conflict
             return false;
@@ -112,10 +112,10 @@ public class Course implements Serializable
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         // Put each separate time into a LocalTime variable so they can be compared
-        LocalTime thisStart = LocalTime.parse(this.startTime, formatter);
-        LocalTime thisEnd = LocalTime.parse(this.endTime, formatter);
-        LocalTime otherStart = LocalTime.parse(other.startTime, formatter);
-        LocalTime otherEnd = LocalTime.parse(other.endTime, formatter);
+        LocalTime thisStart = LocalTime.parse(this.getTimeslot(0).getStartTime(), formatter);
+        LocalTime thisEnd = LocalTime.parse(this.getTimeslot(0).getEndTime(), formatter);
+        LocalTime otherStart = LocalTime.parse(other.getTimeslot(0).getStartTime(), formatter);
+        LocalTime otherEnd = LocalTime.parse(other.getTimeslot(0).getEndTime(), formatter);
 
         // If this class ends before that on starts or this one starts after that one ends
         if(thisEnd.isBefore(otherStart) || thisStart.isAfter(otherEnd))
@@ -141,6 +141,11 @@ public class Course implements Serializable
     public void setCourseID(String courseID)
     {
         this.courseID = courseID;
+    }
+
+    public ArrayList getClassTimes()
+    {
+        return classTimes;
     }
 
     public Timeslot getTimeslot(int i)
