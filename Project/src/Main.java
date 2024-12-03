@@ -51,6 +51,7 @@ public class Main implements Serializable
                     String timeSlot = myScanner.nextLine();
                     System.out.println("Is there a prof? Yes/No");
                     String answer = myScanner.nextLine();
+
                     if (answer.equalsIgnoreCase("Yes"))
                     {
                         // If there is a prof it will call constructor with prof

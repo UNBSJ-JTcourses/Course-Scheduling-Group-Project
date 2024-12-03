@@ -1,6 +1,7 @@
 import java.io.*;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 /****************************************************************************
  * CS2043 - Project Course Class
  * @ author - Nicolas Serrano, Domenica Vasco and Taryn Cail
@@ -12,9 +13,9 @@ public class Course implements Serializable
     // Instance Data
     private String courseID;
     private String extraText;
-    private char day;
-    private String startTime;
-    private String endTime;
+    private boolean hasMultipleTimes;
+    private ArrayList<Timeslot> classTimes;
+    private Timeslot timeslot;
     private String instructor;
 
     // Constructor with instructor
@@ -23,7 +24,10 @@ public class Course implements Serializable
         this.courseID = courseID;
         this.extraText = extraText;
         this.instructor = instructor;
-        parseTimeSlot(timeSlot);
+        // This divides the separate courses on ';'
+        this.classTimes = createSeperateCourses(timeSlot);
+        // If there is more than one timeslot it will be true
+        this.hasMultipleTimes = classTimes.size() > 1;
     }
 
     // Constructor WITHOUT instructor
@@ -31,10 +35,67 @@ public class Course implements Serializable
     {
         this.courseID = courseID;
         this.extraText = extraText;
-        parseTimeSlot(timeSlot);
+        // This divides the seperate courses on ';'
+        this.classTimes = createSeperateCourses(timeSlot);
+        // If there is more than one timeslot it will be true
+        this.hasMultipleTimes = classTimes.size() > 1;
         instructor = "TBD";
     }
 
+    // Constructor of a basic course without multiple times
+    public Course(String courseID, String extraText, Timeslot timeslot, String instructor)
+    {
+        this.courseID = courseID;
+        this.extraText = extraText;
+        this.timeslot = timeslot;
+        this.instructor = instructor;
+    }
+
+    // Add a non-course block constructor here
+
+
+    // Method to create multiple classes from courses seperated by a ';'
+    public static ArrayList<Timeslot> createSeperateCourses(String timeslot)
+    {
+        // Creating arrayList
+        ArrayList<Timeslot> classTimes = new ArrayList<>();
+
+        // Creating a string array to split the classes
+        String[] slots = timeslot.split(";");
+
+        // For each String slot in slots
+        for(String slot: slots)
+        {
+            slot = slot.trim();
+            // Parse the timeslot
+            classTimes.add(parseTimeSlot(slot));
+        }
+        // return arraylist of courses
+        return classTimes;
+    }
+
+    // Parsing the inputted string into different times
+    public static Timeslot parseTimeSlot(String timeSlot)
+    {
+        // Create an array of strings in order to extract the first day char
+        String[] parts = timeSlot.split(" ",2);
+
+        // Putting the first part into the day
+        char day = parts[0].charAt(0);
+
+        // Create another array of strings to get the times
+        String[] times = parts[1].split("-");
+
+        // Putting the first part into the startTime
+        String startTime = times[0].trim();
+
+        // Putting the second part into the endTime
+        String endTime = times[1].trim();
+
+        return new Timeslot(day, startTime, endTime);
+    }
+
+/* */ // MAYBE NOT NEEDED ANYMORE?
     // Check for Conflicts Method
     public boolean checkCourseConflict(Course other)
     {
@@ -69,25 +130,7 @@ public class Course implements Serializable
         }
     }
 
-    // Parsing the inputted string into different times
-    public void parseTimeSlot(String timeSlot)
-    {
-        // Create an array of strings in order to extract the first day char
-        String[] parts = timeSlot.split(" ",2);
-
-        // Putting the first part into the day
-        this.day = parts[0].charAt(0);
-
-        // Create another array of strings to get the times
-        String[] times = parts[1].split("-");
-
-        
-        // Putting the first part into the startTime
-        this.startTime = times[0].trim();
-        // Putting the second part into the endTime
-        this.endTime = times[1].trim();
-    }
-
+// */
 
     // Basic Methods
     public String getCourseID()
@@ -100,6 +143,11 @@ public class Course implements Serializable
         this.courseID = courseID;
     }
 
+    public Timeslot getTimeslot(int i)
+    {
+        return classTimes.get(i);
+    }
+
     public String getExtraText()
     {
         return extraText;
@@ -107,30 +155,6 @@ public class Course implements Serializable
 
     public void setExtraText(String extraText) {
         this.extraText = extraText;
-    }
-
-    public char getDay() {
-        return day;
-    }
-
-    public void setDay(char day) {
-        this.day = day;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getInstructor() {
@@ -141,9 +165,15 @@ public class Course implements Serializable
         this.instructor = instructor;
     }
 
+    public boolean getHasMultipleTimes()
+    {
+        return hasMultipleTimes;
+    }
+
+    // FIX THIS maybe
     public String toString()
     {
-        return courseID + ", " + extraText + ", " + day + ", " + startTime + "-" + endTime + ", " + instructor ;
+        return courseID + ", " + extraText + ", " + this.classTimes.toString() + ", " + instructor ;
 
     }
 }

@@ -24,8 +24,27 @@ public class Group implements Serializable
     }
 
     // Check for conflict in a group
+    // NEED TO FIX THIS
     public void checkGroupConflict()
     {
+        // Create an arrayList that will hold every course in the group with every timeslot
+        ArrayList<Course> allCoursesInGroup = new ArrayList<>();
+
+        // For each course in the group
+        // Creat a new course for every time slot if there is more than one
+        int i = 0;
+        for(Course c: list)
+        {
+            // If there's multiple class times make each individual course
+            if(c.getHasMultipleTimes())
+            {
+                // Make new course and add to arraylist of all courses
+                allCoursesInGroup.add(new Course(c.getCourseID(), c.getExtraText(), c.getTimeslot(i), c.getInstructor()));
+                i++;
+            }
+        }
+
+
         boolean conflict = false;
         // Comparing every i course to every j course in group
         for(int i = 0; i < list.size(); i++)
@@ -52,6 +71,7 @@ public class Group implements Serializable
     }
 
     // Display Schedule of a group
+    // For every course with multiple timeslots create each individual course
     public void displaySchedule()
     {
         // Sort group first
