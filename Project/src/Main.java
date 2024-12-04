@@ -114,11 +114,13 @@ public class Main implements Serializable
                 case 6:
                     // Writes everything into a file
                     ArraySerialization.save(mainGroupList);
+                    System.out.println("File saved successfully!");
                     break;
 
                 case 7:
                     // Reads from a file named "OutputFile.dat"
                     ArraySerialization.read(mainGroupList);
+                    System.out.println("File read successfully!");
                     break;
 
                 case 8:
