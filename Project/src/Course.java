@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * CS2043 - Project Course Class
  * @ author - Nicolas Serrano, Domenica Vasco and Taryn Cail
  * @ version - 1.0
- * @ date - October 31st, 2024
+ * @ date - December 6th, 2024
  ****************************************************************************/
 public class Course implements Serializable
 {

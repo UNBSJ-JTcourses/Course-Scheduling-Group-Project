@@ -4,7 +4,7 @@ import java.util.Scanner;
  * CS2043 - Project Main Method
  * @ author - Nicolas Serrano, Domenica Vasco and Taryn Cail
  * @ version - 1.0
- * @ date - October 30th, 2024
+ * @ date - December 6th, 2024
  ****************************************************************************/
 public class Main implements Serializable
 {
@@ -113,13 +113,13 @@ public class Main implements Serializable
 
                 case 6:
                     // Writes everything into a file
-                    ArraySerialization.save(mainGroupList);
+                    FileManager.save(mainGroupList);
                     System.out.println("File saved successfully!");
                     break;
 
                 case 7:
                     // Reads from a file named "OutputFile.dat"
-                    ArraySerialization.read(mainGroupList);
+                    FileManager.read(mainGroupList);
                     System.out.println("File read successfully!");
                     break;
 
