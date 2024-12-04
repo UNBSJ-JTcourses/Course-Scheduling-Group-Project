@@ -1,7 +1,6 @@
 import java.io.*;
-import java.util.ArrayList;
 
-class ArraySerialization
+class FileManager
 {
     public static void save(GroupList o)
     {
