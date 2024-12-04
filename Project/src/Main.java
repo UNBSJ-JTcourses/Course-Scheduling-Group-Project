@@ -76,6 +76,8 @@ public class Main implements Serializable
                     String timeslot = myScanner.nextLine();
                     Course newCourse = new Course(blockTitle, timeslot);
                     mainCourseList.addCourse(newCourse);
+                    System.out.print("Non-Course Block made successfully!\n");
+                    break;
 
                 case 3:
                     // Creating a group

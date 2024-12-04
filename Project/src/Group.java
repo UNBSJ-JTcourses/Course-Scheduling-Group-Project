@@ -24,7 +24,6 @@ public class Group implements Serializable
     }
 
     // Check for conflict in a group
-    // NEED TO FIX THIS
     public void checkGroupConflict()
     {
         // Create an arrayList that will hold every course in the group with every timeslot
@@ -91,7 +90,7 @@ public class Group implements Serializable
         // For each course in the group get the toString and print it
         for(int i = 0; i < allCoursesInGroup.size(); i++)
         {
-            currentCourse = list.get(i);
+            currentCourse = allCoursesInGroup.get(i);
             results = currentCourse.toString();
             System.out.println(results);
         }

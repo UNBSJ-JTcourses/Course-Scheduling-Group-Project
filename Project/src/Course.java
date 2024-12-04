@@ -53,10 +53,10 @@ public class Course implements Serializable
     }
 
     // A non-course block constructor
-    public Course(String extraText, String timeslot)
+    public Course(String blockTitle, String timeslot)
     {
-        this.courseID = "";
-        this.extraText = extraText;
+        this.courseID = blockTitle;
+        this.extraText = "";
         this.classTimes = new ArrayList<>();
         this.classTimes = createSeperateCourses(timeslot);
         instructor = "";
