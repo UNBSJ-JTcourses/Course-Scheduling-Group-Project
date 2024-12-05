@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 /****************************************************************************
- * CS2043 - Project CourseList Class
+ * CS2043 - Project GroupList Class
  * @ author - Nicolas Serrano, Domenica Vasco and Taryn Cail
  * @ version - 1.0
  * @ date - December 6th, 2024
